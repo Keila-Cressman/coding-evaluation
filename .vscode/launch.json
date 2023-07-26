@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MyOrganization",
+            "request": "launch",
+            "mainClass": "com.aa.act.interview.org.MyOrganization",
+            "projectName": "coding-evaluation_6824007d"
+        },
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/dotnet/MyOrganization/bin/Debug/net6.0/MyOrganization.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/dotnet/MyOrganization",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}

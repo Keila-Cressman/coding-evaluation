@@ -1,11 +1,15 @@
 package com.aa.act.interview.org;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 public abstract class Organization {
 
     private Position root;
-    
+    private Position empInfo;
+    private int empID = 0;
+    HashMap<String, String> empMap = new HashMap<String, String>();
+
     public Organization() {
         root = createOrganization();
     }
@@ -20,19 +24,29 @@ public abstract class Organization {
      * @return the newly filled position or empty if no position has that title
      */
     public Optional<Position> hire(Name person, String title) {
-        //your code here
-        return Optional.empty();
+        //keep track of incoming employees
+        empID++;
+        //now we can create an Employee
+        Employee emp = new Employee(empID, person);
+        //store info in Position root to set Employee
+        empInfo = new Position(title, emp);
+        //use map to search title
+        empMap.put(title, (person.toString()));
+        
+        
+        //ofNullable b/c we want either the employee or empty
+        return Optional.ofNullable(root);
     }
 
     @Override
     public String toString() {
-        return printOrganization(root, "");
+        return printOrganization(root,empMap, "");
     }
     
-    private String printOrganization(Position pos, String prefix) {
-        StringBuffer sb = new StringBuffer(prefix + "+-" + pos.toString() + "\n");
+    private String printOrganization(Position pos, HashMap<String,String> nm, String prefix) {
+        StringBuffer sb = new StringBuffer(prefix + "+-" + pos.toString() + ": " + nm.get(pos.toString()) +"\n");
         for(Position p : pos.getDirectReports()) {
-            sb.append(printOrganization(p, prefix + "  "));
+            sb.append(printOrganization(p, nm, prefix + "  "));   
         }
         return sb.toString();
     }
